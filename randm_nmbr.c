@@ -4,7 +4,9 @@
 
 // Function to generate a random number between 'lower' and 'upper'
 int generateRandomNumber(int lower, int upper) {
-    return (rand() % (upper - lower + 1)) + lower;
+    int a= (rand() % (upper - lower + 1)) + lower;
+    printf("a=%d\n",a);
+    return a;
 }
 
 // Function to check if the guess is correct and close to the target
@@ -15,12 +17,13 @@ int checkGuess(int guess, int target, int *isClose) {
         return 1; // Correct guess
     } else if (abs(target - guess) <= threshold) {
         *isClose = 1; // Close
-        return 0; // Incorrect guess
-    } else if (guess < target) {
-        *isClose = 0; // Not close
+    }
+    else{
+        *isClose = 0; // Not Close
+    }
+    if (guess < target) {
         return -1; // Guess is too low
     } else {
-        *isClose = 0; // Not close
         return 0; // Guess is too high
     }
 }
@@ -38,16 +41,15 @@ int main() {
     int target, guess, attempts = 0;
     int isClose = 0; // Variable to indicate if the guess is close
 
-    srand(time(NULL)); // Seed the random number generator
-    target = generateRandomNumber(lower, upper); // Generate the random number
-    
-    
     printf("Welcome to the Number Guessing Game!\n");
     printf("Enter the upper limit and lower limit: \n"); // Asking user for input
     scanf("%d%d",&upper,&lower);
+
+    srand(time(NULL)); // Seed the random number generator
+    target = generateRandomNumber(lower, upper); // Generate the random number
+
     int maxAttempts = determineAttempts(lower, upper); // Determine the maximum number of attempts
     printf("You have %d attempts to guess the number.\n", maxAttempts);
-
     // Game loop
     do {
         printf("Enter your guess: ");
