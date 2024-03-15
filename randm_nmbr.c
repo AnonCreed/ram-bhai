@@ -5,7 +5,6 @@
 // Function to generate a random number between 'lower' and 'upper'
 int generateRandomNumber(int lower, int upper) {
     int a= (rand() % (upper - lower + 1)) + lower;
-    printf("a=%d\n",a);
     return a;
 }
 
